@@ -1,3 +1,5 @@
+-- Get total duration of all assistance requests for each cohort
+
 SELECT cohorts.name AS cohort, SUM(completed_at - started_at) AS total_duration
 FROM assistance_requests
 JOIN students ON student_id = students.id
