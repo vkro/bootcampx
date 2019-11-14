@@ -1,5 +1,5 @@
 const { Pool } = require('pg');
-const input = process.argv.splice(2);
+const userInput = process.argv.splice(2);
 
 const pool = new Pool({
   user: 'vagrant',
@@ -12,7 +12,8 @@ pool.query(`
 SELECT students.id, students.name, cohorts.name AS cohort
 FROM students
 JOIN cohorts ON cohort_id = cohorts.id
-LIMIT 5;
+WHERE cohorts.name LIKE '%${userInput[0]}%'
+LIMIT ${userInput[1]};
 `)
 
 .then(res => {
